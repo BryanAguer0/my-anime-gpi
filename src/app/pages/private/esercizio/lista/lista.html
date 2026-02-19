@@ -1,3 +1,17 @@
-<p>lista works!</p>
-{{ listaAnime() }}
+@for (item of listaAnime(); track $index) {
+
+
+    <app-my-card>
+        <h6 card-header>
+            Questo é un titolo
+        </h6>
+        {{item.name}}
+        Un altro testo
+        <p card-footer>
+            Qui siamo nel footer
+        </p>
+        <app-like></app-like>
+    </app-my-card>
+}
+
 <button (click) = "onButtonClick()" > button</button>

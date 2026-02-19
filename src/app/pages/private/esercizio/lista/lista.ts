@@ -1,9 +1,11 @@
 import { Component, EventEmitter, input, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Anime } from '../../../../models/anime';
+import { MyCard } from '../my-card/my-card';
+import { Like } from '../like/like';
 
 @Component({
   selector: 'app-lista',
-  imports: [],
+  imports: [MyCard, Like],
   templateUrl: './lista.html',
   styleUrl: './lista.css',
 })
