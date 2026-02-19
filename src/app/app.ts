@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormField } from '@angular/forms/signals';
+import { Esercizio } from './pages/private/esercizio/esercizio';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, FormField],
+  imports: [FormsModule,Esercizio],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
