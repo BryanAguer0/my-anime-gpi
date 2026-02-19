@@ -16,4 +16,7 @@ export class Esercizio {
     new Anime({id:1,name:'secondo',image:''})
   ];
 
+  onCardClick(evento:string){
+    console.log('onCardClick from esercizio:',evento);
+  }
 }

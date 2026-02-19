@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, input, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Anime } from '../../../../models/anime';
 
 @Component({
@@ -11,8 +11,12 @@ export class Lista implements OnInit,OnChanges,OnDestroy {
 
 
 
-  @Input()
-  listaAnime:Anime[] = [];
+  // @Input()
+  // listaAnime :Anime[] = [];
+  listaAnime = input<Anime[]>();
+
+  @Output()
+  onCardClick: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit(): void {
     console.log('ngOnInit');
@@ -25,6 +29,10 @@ export class Lista implements OnInit,OnChanges,OnDestroy {
 
   ngOnDestroy(): void {
     console.log('ngOnDestroy');
+  }
+
+  onButtonClick(){
+    this.onCardClick.emit("lista");
   }
 
 }
