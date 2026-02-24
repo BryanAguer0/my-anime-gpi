@@ -1,16 +1,18 @@
-<p>esercizio works!</p>
-<button [appHasRoleDisabled]="'user'" (click)="OnButtonPress()" class = 'px-4 py-2 border border-amber-500'>  
-    Guarda la lista
-        
-</button>
+<div class="p-8">
+    <app-searchbar></app-searchbar>
+    <p>esercizio works!</p>
+    <button [appHasRoleDisabled]="'user'" (click)="OnButtonPress()" class='px-4 py-2 border border-amber-500'>
+        Guarda la lista
 
-<div *appHasRole="'admin'">
-    <p>
-        Questo é un messaggio solo per l'admin
-    </p>
-</div>
+    </button>
 
-<!-- deprecato 
+    <div *appHasRole="'admin'">
+        <p>
+            Questo é un messaggio solo per l'admin
+        </p>
+    </div>
+
+    <!-- deprecato 
     <app-lista
     *ngIf="canshow"
     [listaAnime]="listaAnime"
@@ -19,39 +21,38 @@
     </app-lista>
 -->
 
-@if(canshow){
-    <app-lista
-    [listaAnime]="listaAnime"
-    (onCardClick)="onCardClick($event)"
-    >
+    @if(canshow){
+    <app-lista [listaAnime]="listaAnime" (onCardClick)="onCardClick($event)">
     </app-lista>
-}
+    }
 
-<div class = 'w-full flex justify-around'>
-    <button (click)="themestatus = 'auto'" [ngClass]="{'bg-amber-700':themestatus === 'auto'}" class = 'px-4 py-2'>  Auto  </button>
-    <button (click)="themestatus = 'dark'" [ngClass]="{'bg-green-600':themestatus === 'dark'}" class = 'px-4 py-2'> Dark  </button>
-    <button (click)="themestatus = 'light'" [ngClass]="{'bg-cyan-600':themestatus === 'light'}" class = 'px-4 py-2'>  Light </button>
-</div>
+    <div class='w-full flex justify-around'>
+        <button (click)="themestatus = 'auto'" [ngClass]="{'bg-amber-700':themestatus === 'auto'}" class='px-4 py-2'>
+            Auto </button>
+        <button (click)="themestatus = 'dark'" [ngClass]="{'bg-green-600':themestatus === 'dark'}" class='px-4 py-2'>
+            Dark </button>
+        <button (click)="themestatus = 'light'" [ngClass]="{'bg-cyan-600':themestatus === 'light'}" class='px-4 py-2'>
+            Light </button>
+    </div>
 
-@switch (themestatus) {
+    @switch (themestatus) {
     @case('auto'){
 
-        <p>
-            Questo testo é in auto
-        </p>
+    <p>
+        Questo testo é in auto
+    </p>
     }
     @case('dark'){
 
-        <p>
-            Questo testo é in dark
-        </p>
+    <p>
+        Questo testo é in dark
+    </p>
     }
     @case('light'){
 
-        <p>
-            Questo testo é in light
-        </p>
+    <p>
+        Questo testo é in light
+    </p>
     }
-}
-
-
+    }
+</div>

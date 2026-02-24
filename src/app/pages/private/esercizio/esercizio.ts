@@ -4,11 +4,12 @@ import { Lista } from './lista/lista';
 import { CommonModule } from '@angular/common';
 import { HasRoleDirective } from '../../../shared/directives/has-role';
 import { HasRoleDisabled } from '../../../shared/directives/has-role-disabled';
+import { Searchbar } from './searchbar/searchbar';
 
 
 @Component({
   selector: 'app-esercizio',
-  imports: [Lista, CommonModule, HasRoleDirective, HasRoleDisabled],
+  imports: [Lista, CommonModule, HasRoleDirective, HasRoleDisabled, Searchbar],
   templateUrl: './esercizio.html',
   styleUrl: './esercizio.css',
 })
@@ -18,8 +19,8 @@ export class Esercizio {
   themestatus:'auto'|'dark'|'light'='auto';
 
   public listaAnime:Anime[] = [
-    new Anime({id:0,name:'primo',image:''}),
-    new Anime({id:1,name:'secondo',image:''})
+    //new Anime({id:0,name:'primo',image:''}),
+    //new Anime({id:1,name:'secondo',image:''})
   ];
 
   onCardClick(evento:string){

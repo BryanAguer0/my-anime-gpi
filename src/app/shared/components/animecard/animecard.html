@@ -1,0 +1,7 @@
+@let item = anime();
+<div class="w-full p-2 flex flex-col">
+    <img [src]="item.image" />
+    <h6>{{item.name}}</h6>
+    <small>{{item.airedFrom | date: "MM/dd/yyyy"}}</small>
+    <p>{{item.description}}</p>
+</div>

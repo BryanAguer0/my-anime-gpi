@@ -2,10 +2,11 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormField } from '@angular/forms/signals';
 import { Esercizio } from './pages/private/esercizio/esercizio';
+import { Animelist } from "./pages/private/animelist/animelist";
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule,Esercizio],
+  imports: [FormsModule, Esercizio, Animelist],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
