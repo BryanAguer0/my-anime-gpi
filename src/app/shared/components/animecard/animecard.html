@@ -1,8 +1,8 @@
 @let item = anime();
-<div class="w-full p-2 flex flex-col">
-    <img [src]="item.image" />
+<div class="w-full p-2 flex flex-col cursor-pointer" (click)="goToDetail()">
+    <img [src]="item.image" [title]="item.name" class="h-40 object-cover" />
     <h6>{{item.name}}</h6>
     <small>genere: {{item.genres}}</small>
     <small>{{item.airedFrom | date: "MM/dd/yyyy"}}</small>
-    <p>{{item.description}}</p>
+    <p>{{item.description | truncate:200}}</p>
 </div>

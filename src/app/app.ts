@@ -1,12 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FormField } from '@angular/forms/signals';
-import { Esercizio } from './pages/private/esercizio/esercizio';
-import { Animelist } from "./pages/private/animelist/animelist";
+import { Navbar } from './shared/components/navbar/navbar';
+import { Footer } from './shared/components/footer/footer';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, Esercizio, Animelist],
+  imports: [FormsModule, Navbar, Footer, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
