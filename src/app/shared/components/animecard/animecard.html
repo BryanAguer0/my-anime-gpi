@@ -2,6 +2,7 @@
 <div class="w-full p-2 flex flex-col">
     <img [src]="item.image" />
     <h6>{{item.name}}</h6>
+    <small>genere: {{item.genres}}</small>
     <small>{{item.airedFrom | date: "MM/dd/yyyy"}}</small>
     <p>{{item.description}}</p>
 </div>

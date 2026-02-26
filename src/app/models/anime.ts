@@ -6,6 +6,7 @@ export class Anime {
   image: string= '';
   description: string= '';
   airedFrom: Date= new Date();
+  genres: string[] = [];
 
   constructor(obj?:IAnime){
     if(obj!= null){
@@ -14,6 +15,7 @@ export class Anime {
       this.image = obj.images['webp'].image_url;
       this.description = obj.synopsis
       this.airedFrom = obj.aired.from
+      this.genres = obj.genres.map((genre) => genre.name);
     }
   }
 }
