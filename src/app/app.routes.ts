@@ -2,19 +2,20 @@ import { Routes } from '@angular/router';
 import { Animelist } from './pages/private/animelist/animelist';
 import { Animedetail } from './pages/private/animelist/animedetail/animedetail';
 import { Notfound } from './shared/components/notfound/notfound';
+import { isAutenticatedGuard } from './shared/guards/is-autenticated-guard';
 
 export const routes: Routes = [
     {
-        path: "home",
-        loadChildren: () => import("./pages/private/animelist/animelist.route").then((route) => route.routes)
- /*       component: Animelist,
-        children: [
-            {
-                path: "dettaglio",
-                component: Animedetail
-            }
-        ]*/
+        path : "private",
+        loadChildren:() => import("./pages/private/private.routes").then((route) => route.privateRoutes),
+        canActivate : [isAutenticatedGuard]
     },
+
+    {
+        path : "public",
+        loadChildren:() => import("./pages/public/public.routes").then((route) => route.publicRoutes)
+    },
+    
 /*    {
         path: "home/anime-list",
         component: Animelist
@@ -24,12 +25,8 @@ export const routes: Routes = [
         component: Animedetail
     },*/
     {
-        path: "esercizi",
-        loadComponent: () => import("./pages/private/esercizio/esercizio").then((component) => component.Esercizio)
-    },
-    {
         path: "",
-        redirectTo: "home",
+        redirectTo: "private",
         pathMatch: "full"
     },
         {

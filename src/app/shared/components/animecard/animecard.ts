@@ -17,6 +17,7 @@ export class Animecard {
 
   public goToDetail() {
     this.router.navigate([
+      "private",
       "home",
       "anime-detail",
       this.anime().id

@@ -1,3 +1,7 @@
+export interface UserCredentials {
+    email : string
+    password : string
+}
 export class User {
 
     id: number

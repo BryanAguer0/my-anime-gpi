@@ -1,14 +1,14 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { COMPONENTS } from '../../../shared/shared';
 import { AnimeService } from '../../../services/animeService';
 import { Anime } from '../../../models/anime';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { map, Observable, Subject, takeUntil } from 'rxjs';
+import { InfiniteScroll } from '../../../shared/directives/infinite-scroll';
+
 
 @Component({
   selector: 'app-animelist',
-  imports: [...COMPONENTS, AsyncPipe],
+  imports: [...COMPONENTS,InfiniteScroll],
   templateUrl: './animelist.html',
   styleUrl: './animelist.css',
 })
@@ -16,24 +16,28 @@ export class Animelist implements OnInit, OnDestroy {
 
   private animeService = inject(AnimeService)
   list: Anime[] = []
+  listAnime= signal <Anime[]>([])
   list$ = new Observable<Anime[]>
   destroy$ = new Subject<boolean>()
+  currentpage:number=0
 
   ngOnInit(): void {
-    this.list$ = this.animeService.getListaAnime().pipe(
-      takeUntil(this.destroy$)
-      //oppure ha bisogno di una variabile DestroyReff
-      //takeUntilDestroyed
-    )
-    //.subscribe(
-    //  {
-    //    next:(lista) => this.list = lista
-    //  }
-    //)
+    this.loadAnime()
   }
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
+  }
+
+  loadAnime(): void{
+    this.currentpage++;
+    this.animeService.getListaAnime(this.currentpage).pipe(
+      takeUntil(this.destroy$),map((newlist)=>{
+        this.listAnime.update((currentlist)=>[...currentlist,...newlist])
+
+      }))
+      .subscribe()
+
   }
 }
