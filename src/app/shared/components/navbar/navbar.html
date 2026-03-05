@@ -17,6 +17,12 @@
         <li>
           <a routerLink="/private/esercizi" routerLinkActive="active" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Esercizi</a>
         </li>
+        <li>
+          <a routerLink="/private/todolist" routerLinkActive="active" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent  cursor-pointer">ToDoList</a>
+        </li>
+        <li>
+          <a (click)="logOut()" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent text-red-500 cursor-pointer">Log Out</a>
+        </li>
       </ul>
     </div>
   </div>

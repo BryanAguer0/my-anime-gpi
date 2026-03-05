@@ -3,6 +3,7 @@ import { Animelist } from './pages/private/animelist/animelist';
 import { Animedetail } from './pages/private/animelist/animedetail/animedetail';
 import { Notfound } from './shared/components/notfound/notfound';
 import { isAutenticatedGuard } from './shared/guards/is-autenticated-guard';
+import { isAlreadyAutenticatedGuard } from './shared/guards/is-already-autenticated-guard';
 
 export const routes: Routes = [
     {
@@ -13,8 +14,10 @@ export const routes: Routes = [
 
     {
         path : "public",
-        loadChildren:() => import("./pages/public/public.routes").then((route) => route.publicRoutes)
+        loadChildren:() => import("./pages/public/public.routes").then((route) => route.publicRoutes),
+        canActivate:[isAlreadyAutenticatedGuard]
     },
+
     
 /*    {
         path: "home/anime-list",
