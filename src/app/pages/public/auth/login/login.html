@@ -14,13 +14,24 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form action="#" method="POST" class="space-y-6">
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" action="#" method="POST" class="space-y-6">
             <div>
                 <label for="email" class="block text-sm/6 font-medium text-gray-100">Email address</label>
                 <div class="mt-2">
-                    <input id="email" type="email" name="email" required autocomplete="email"
+                    <input [(ngModel)]="userCredentials.email" #emailRef="ngModel" id="email" type="email" name="email"
+                        required email autocomplete="email"
                         class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
                 </div>
+                @if(emailRef.errors?.['required'] && emailRef.touched) {
+                <small class="text-red-500">
+                    Emails Required
+                </small>
+                }
+                @if(emailRef.errors?.['email'] && emailRef.touched && emailRef.dirty) {
+                <small class="text-red-500">
+                    Emails is invalid
+                </small>
+                }
             </div>
 
             <div>
@@ -31,15 +42,15 @@
                     </div>
                 </div>
                 <div class="mt-2">
-                    <input id="password" type="password" name="password" required autocomplete="current-password"
+                    <input [(ngModel)]="userCredentials.password" id="password" type="password" name="password" required
+                        autocomplete="current-password"
                         class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
                 </div>
             </div>
 
             <div>
-                <button type="button"
-                    class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                    (click)="login()">
+                <button type="submit" [disabled]="loginForm.invalid"
+                    class="flex w-full justify-center rounded-md bg-indigo-500 disabled:bg-indigo-100 disabled:opacity-10 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
                     @if(loading()){
                     <svg aria-hidden="true" class="w-8 h-8 text-neutral-tertiary animate-spin fill-brand mr-2"
                         viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,4 +71,7 @@
             <a href="#" class="font-semibold text-indigo-400 hover:text-indigo-300">Start a 14 day free trial</a>
         </p>
     </div>
+    <pre class="text-white">
+                    {{emailRef.errors | json}}
+                </pre>
 </div>

@@ -1,13 +1,14 @@
 import { Component, inject, OnDestroy, signal } from '@angular/core';
-import { Auth } from '../auth';
 import { OAuth } from '../../../../services/o-auth';
 import { UserCredentials } from '../../../../models/user';
 import { catchError, finalize, Subject, switchMap, takeUntil, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [FormsModule, JsonPipe],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -16,6 +17,7 @@ export class Login implements OnDestroy{
   router = inject(Router);
   loading = signal<boolean>(false)
   destroy$ = new Subject<boolean>()
+  userCredentials:UserCredentials = {email: "", password:""}
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
@@ -25,12 +27,7 @@ export class Login implements OnDestroy{
 
   login(): void {
     this.loading.set(true)
-    const fakeCredentials: UserCredentials = {
-      email: "ciao@ciao.it",
-      password: "ciaociao"
-
-    }
-    this.oAuthService.login(fakeCredentials).pipe(
+    this.oAuthService.login(this.userCredentials).pipe(
       switchMap((UserCredentials) => this.oAuthService.getUser()),
       takeUntil(this.destroy$),
       finalize(() => {
@@ -43,6 +40,14 @@ export class Login implements OnDestroy{
       })
     ).subscribe()
 
+  }
+
+  onSubmit(form:NgForm) {
+    console.log(form)
+    console.log(this.userCredentials)
+    if (form.valid) {
+      this.login();
+    }
   }
 
 }

@@ -1,7 +1,8 @@
-<div class="flex flex-col justify-center items-center max-w-4xl m-auto">
+<div class="flex flex-col justify-center items-center max-w-4xl m-auto gap-6">
     <div class="flex gap-4 w-full mb-4">
-    <input class="px-4 py-2 border border-blue-500 rounded-md" type="text" [value]="text()" (input)="text.set($event.target.value)"> {{text()}}
-    <button class="px-4 py-2 border border-blue-500 rounded-md" (click)="addToDo()">Add</button> 
+        <input class="px-4 py-2 border border-blue-500 rounded-md" type="text" [value]="text()"
+            (input)="text.set($event.target.value)"> {{text()}}
+        <button class="px-4 py-2 border border-blue-500 rounded-md" (click)="addToDo()">Add</button>
     </div>
     <!--
     <ul class="bg-gray-400">
@@ -11,41 +12,64 @@
         
     </ul>
     -->
-   <div
-  class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
-  <table class="w-full text-left table-auto min-w-max">
-    <thead>
-      <tr>
-        <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-          <p class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-            Item
-          </p>
-        </th>
-        <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-          <p class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-            Actions
-          </p>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="p-4 border-b border-blue-gray-50">
-          <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-            John Michael
-          </p>
-        </td>
-        <td class="p-4 border-b border-blue-gray-50">
-          <a href="#" class="block font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900">
-            Edit
-          </a>
-          <button>Complete</button>
-          <a>Delete</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-    <p>Completed: {{completed()}} </p> 
+    <div
+        class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
+        <table class="w-full text-left table-auto min-w-max">
+            <thead>
+                <tr>
+                    <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                        <p
+                            class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                            Item
+                        </p>
+                    </th>
+                    <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                        <p
+                            class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                            Actions
+                        </p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @for(item of allToDos(); track $index) {
+                <tr>
+                    <td class="p-4 border-b border-blue-gray-50">
+                        <div class="flex gap-4">
+                            <input type="checkbox" [checked]="item.completed" (change)="completeToDo(item.id)">
+                            @if(!item.isEdit) {
+                                <p
+                                class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                                {{item.text}}
+                            </p>
+                            } @else {
+                                <input class="px-2 py-2 border border-blue-500" type="text" [value]="item.text" (input)="item.text = $event.target.value"/>
+                            }
+                        </div>
+                    </td>
+                    <td class="p-4 border-b border-blue-gray-50">
+                        <div class="flex gap-4">
+                            @if(item.isEdit) {
+                                <a  (click)="update(item)"
+                                class="block font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900 cursor-pointer">
+                                Save
+                            </a>
+                            } @else {
+                                <a  (click)="setToDoToEdit(item)"
+                                class="block font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900 cursor-pointer">
+                                Edit
+                            </a>
+                            }
+                            
+                            <a (click)="delete(item.id)" class="block font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900 cursor-pointer">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <p>Completed: {{completed()}} </p>
     <p>Pending: {{pending()}}</p>
 </div>
