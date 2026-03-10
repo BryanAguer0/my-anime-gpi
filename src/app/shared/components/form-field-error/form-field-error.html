@@ -1,0 +1,6 @@
+@if(control()?.status==='PENDING'){
+  <small class="text-amber-500">AWAITING VALIDATION...</small>
+}
+@if(errorMessage(); as msg){
+  <small class="text-red-500">{{msg}}</small>
+}

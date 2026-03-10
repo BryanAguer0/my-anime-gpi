@@ -2,6 +2,23 @@ export interface UserCredentials {
     email : string
     password : string
 }
+export interface RegisterFormData {
+  name : string;
+  surname : string;
+  age : number;
+  date: string;
+  email : string;
+  password : string;
+}
+export interface RegisterFormSignalData {
+  name : string;
+  surname : string;
+  age : number;
+  date: string;
+  email : string;
+  password : string;
+  repeatPassword: string;
+}
 export class User {
 
     id: number

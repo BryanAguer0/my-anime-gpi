@@ -1,6 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { User, UserCredentials } from '../models/user';
-import { debounceTime, delay, map, Observable, of } from 'rxjs';
+import { RegisterFormData, User, UserCredentials } from '../models/user';
+import { debounceTime, delay, map, Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -44,5 +44,18 @@ export class OAuth {
       this.currentUser.set(null);
     }));
   }
-  
+
+  register(data: RegisterFormData){
+    return of(data).pipe(
+      delay(2000),
+      switchMap(()=>this.getUser())
+    )
+  }
+
+  addUser(data: RegisterFormData){
+    return of(data).pipe(
+      delay(2000)
+    )
+  }
+
 }

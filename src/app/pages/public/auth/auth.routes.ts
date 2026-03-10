@@ -6,14 +6,18 @@ export const authRoutes : Routes = [
         children : [
             {
                 path : "login",
-                loadComponent : () => import("./login/login").then((component)=> component.Login) 
+                loadComponent : () => import("./login/login").then((component)=> component.Login)
+            },
+            {
+              path: "register",
+              loadComponent : () => import("./register/register").then((component)=> component.Register)
             },
             {
                 path : "",
                 redirectTo : "login",
-                pathMatch : "full" 
+                pathMatch : "full"
             }
-        ] 
+        ]
 
     }
 ]

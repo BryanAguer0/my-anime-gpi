@@ -2,13 +2,13 @@ import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { OAuth } from '../../../../services/o-auth';
 import { UserCredentials } from '../../../../models/user';
 import { catchError, finalize, Subject, switchMap, takeUntil, throwError } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, JsonPipe],
+  imports: [FormsModule, JsonPipe, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -23,7 +23,7 @@ export class Login implements OnDestroy{
     this.destroy$.next(true);
     this.destroy$.complete();
   }
- 
+
 
   login(): void {
     this.loading.set(true)

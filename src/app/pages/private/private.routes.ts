@@ -26,11 +26,15 @@ export const privateRoutes: Routes = [
                 loadComponent: () => import("./todolist/todolist").then((component) => component.Todolist)
             },
             {
+                path: "users",
+                loadComponent: () => import("./users/users").then((component) => component.Users)
+            },
+            {
               path: "",
                 redirectTo: "home",
                 pathMatch : "full"
             },
-            
+
         ]
     },
 

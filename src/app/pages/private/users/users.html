@@ -1,0 +1,116 @@
+
+<div class="flex min-h-full h-full flex-col justify-center px-6 py-12 lg:px-8 bg-black overflow-y-scroll">
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form class="space-y-6" (ngSubmit)="onSubmit()">
+          <div>
+            <label for="name" class="block text-gray-100"> Name: </label>
+            <div class="mt-2">
+              <input type="text" id="name" class="block w-full rounded-md px-3 py-2 bg-white/5 text-white" [formField]="userForm.name">
+            </div>
+            @if(userForm.name().touched() && userForm.name().invalid()){
+              @for (error of userForm.name().errors(); track error.kind) {
+                <small class="text-red-500">{{error.message}}</small>
+              }
+            }
+            <!-- <app-form-field-error [control]="getControlName('name')" [messages]="errorMessages.name"></app-form-field-error> -->
+          </div>
+          <div>
+            <label for="surname" class="block text-gray-100"> Surname: </label>
+            <div class="mt-2">
+              <input type="text" id="surname" class="block w-full rounded-md px-3 py-2 bg-white/5 text-white" [formField]="userForm.surname">
+            </div>
+            @if(userForm.surname().touched() && userForm.surname().invalid()){
+              @for (error of userForm.surname().errors(); track error.kind) {
+                <small class="text-red-500">{{error.message}}</small>
+              }
+            }
+            <!-- <app-form-field-error [control]="getControlName('surname')" [messages]="errorMessages.surname"></app-form-field-error> -->
+          </div>
+          <div>
+            <label for="age" class="block text-gray-100"> Age: </label>
+            <div class="mt-2">
+              <input type="number" id="age" class="block w-full rounded-md px-3 py-2 bg-white/5 text-white" [formField]="userForm.age">
+            </div>
+
+            @if(userForm.age().touched() && userForm.age().invalid()){
+              @for (error of userForm.age().errors(); track error.kind) {
+                <small class="text-red-500">{{error.message}}</small>
+              }
+            }
+            <!-- <app-form-field-error [control]="getControlName('age')" [messages]="errorMessages.age"></app-form-field-error> -->
+          </div>
+          <div>
+            <label for="date" class="block text-gray-100"> Date: </label>
+            <div class="mt-2">
+              <input type="date" id="date" class="block w-full rounded-md px-3 py-2 bg-white/5 text-white" [formField]="userForm.date">
+            </div>
+
+            <!-- <pre class="text-white">
+              {{getControlName('date')?.errors | json}}
+            </pre> -->
+          </div>
+          <div>
+            <label for="email" class="block text-gray-100"> Email: </label>
+            <div class="mt-2">
+              <input type="email" id="email" class="block w-full rounded-md px-3 py-2 bg-white/5 text-white"  [formField]="userForm.email">
+            </div>
+            @if(userForm.email().touched() && userForm.email().invalid()){
+              @for (error of userForm.email().errors(); track error.kind) {
+                <small class="text-red-500">{{error.message}}</small>
+              }
+            }
+            @if(userForm.email().pending()){
+              <small class="text-amber-500">WAITING FOR VALIDATION...</small>
+            }
+            <!-- <app-form-field-error [control]="getControlName('email')" [messages]="errorMessages.email"></app-form-field-error> -->
+          </div>
+          <div>
+            <label for="password" class="block text-gray-100"> Password: </label>
+            <div class="mt-2">
+              <input type="password" id="password" class="block w-full rounded-md px-3 py-2 bg-white/5 text-white" [formField]="userForm.password">
+            </div>
+            @if(userForm.password().touched() && userForm.password().invalid()){
+              @for (error of userForm.password().errors(); track error.kind) {
+                <small class="text-red-500">{{error.message}}</small>
+              }
+            }
+            <!-- <app-form-field-error [control]="getControlName('password')" [messages]="errorMessages.password"></app-form-field-error> -->
+          </div>
+          <div>
+            <label for="repeatPassword" class="block text-gray-100"> Repeat Password: </label>
+            <div class="mt-2">
+              <input type="password" id="repeatPassword" class="block w-full rounded-md px-3 py-2 bg-white/5 text-white" [formField]="userForm.repeatPassword">
+            </div>
+            @if(userForm.repeatPassword().touched() && userForm.repeatPassword().invalid()){
+              @for (error of userForm.repeatPassword().errors(); track error.kind) {
+                <small class="block text-red-500">{{error.message}}</small>
+              }
+            }
+            <!-- <app-form-field-error [control]="getControlName('repeatPassword')" [messages]="errorMessages.repeatPassword" [formErrors]="registerForm.errors"></app-form-field-error> -->
+          </div>
+
+
+          <button type="submit"
+              [disabled]="userForm().invalid() || userForm().pending()"
+              class="flex w-full justify-center rounded-md bg-indigo-500 disabled:bg-indigo-100 disabled:text-gray-400 disabled:opacity-10 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+              @if(loading()){
+              <svg aria-hidden="true" class="w-8 h-8 text-neutral-tertiary animate-spin fill-brand mr-2"
+                  viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                      d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                      fill="currentColor" />
+                  <path
+                      d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                      fill="currentFill" />
+              </svg>
+              }
+              Add User
+            </button>
+        </form>
+      </div>
+      <!-- <div>
+        <pre class="text-white">
+            {{registerForm.errors | json}}
+        </pre>
+      </div> -->
+</div>
