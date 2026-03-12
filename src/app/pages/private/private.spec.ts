@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Private } from './private';
+import { provideRouter } from '@angular/router';
 
 describe('Private', () => {
   let component: Private;
@@ -8,7 +9,9 @@ describe('Private', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Private]
+      imports: [Private],
+      providers: [provideRouter([])]
+
     })
     .compileComponents();
 

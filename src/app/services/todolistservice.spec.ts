@@ -6,7 +6,9 @@ describe('Todolistservice', () => {
   let service: Todolistservice;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [Todolistservice]
+    });
     service = TestBed.inject(Todolistservice);
   });
 

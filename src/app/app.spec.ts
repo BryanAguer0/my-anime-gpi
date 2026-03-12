@@ -14,10 +14,17 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it("should render router-outler", async () => {
     const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    await fixture.whenStable()
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, my-anime');
-  });
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
+  })
+
+  // it('should render title', async () => {
+  //   const fixture = TestBed.createComponent(App);
+  //   await fixture.whenStable();
+  //   const compiled = fixture.nativeElement as HTMLElement;
+  //   expect(compiled.querySelector('h1')?.textContent).toContain('Hello, my-anime');
+  // });
 });
