@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { OAuth } from '../../../services/o-auth';
+import { AuthStore } from '../../../store/auth.store';
 
 
 @Component({
@@ -10,15 +11,13 @@ import { OAuth } from '../../../services/o-auth';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-  authService = inject(OAuth);
+  authStore = inject(AuthStore);
   router = inject(Router);
+  isLoading = this.authStore.loading;
+  user = this.authStore.user
 
   logOut() {
-    this.authService.logOut().subscribe({
-      next: () => {
-        this.router.navigate(['public'])
-      }
-    });
+    this.authStore.logout();
   }
 
 }

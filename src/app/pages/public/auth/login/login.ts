@@ -1,10 +1,10 @@
-import { Component, inject, OnDestroy, signal } from '@angular/core';
-import { OAuth } from '../../../../services/o-auth';
-import { UserCredentials } from '../../../../models/user';
-import { catchError, finalize, Subject, switchMap, takeUntil, throwError } from 'rxjs';
-import { Router, RouterLink } from '@angular/router';
-import { FormsModule, NgForm } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
+import { Component, inject, OnDestroy, signal } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { Subject } from 'rxjs';
+import { UserCredentials } from '../../../../models/user';
+import { AuthStore } from '../../../../store/auth.store';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +12,13 @@ import { JsonPipe } from '@angular/common';
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login implements OnDestroy{
-   oAuthService = inject(OAuth);
+export class Login implements OnDestroy {
+  // oAuthService = inject(OAuth);
   router = inject(Router);
-  loading = signal<boolean>(false)
+  authStore = inject(AuthStore)
+  loading = this.authStore.loading
   destroy$ = new Subject<boolean>()
-  userCredentials:UserCredentials = {email: "", password:""}
+  userCredentials: UserCredentials = { email: "", password: "" }
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
@@ -26,6 +27,7 @@ export class Login implements OnDestroy{
 
 
   login(): void {
+    /*
     this.loading.set(true)
     this.oAuthService.login(this.userCredentials).pipe(
       switchMap((UserCredentials) => this.oAuthService.getUser()),
@@ -38,11 +40,12 @@ export class Login implements OnDestroy{
         this.loading.set(false);
         return throwError(() => error);
       })
-    ).subscribe()
+    ).subscribe()*/
+    this.authStore.login({userCredential:this.userCredentials})
 
   }
 
-  onSubmit(form:NgForm) {
+  onSubmit(form: NgForm) {
     console.log(form)
     console.log(this.userCredentials)
     if (form.valid) {
